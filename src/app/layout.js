@@ -1,7 +1,8 @@
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Auth Credentials Provider",
@@ -14,7 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={outfit.className}>
+        <main className="max-w-[1440px] m-auto bg-[#b3b3b3]">
+          {children}
+          <Toaster />
+        </main>
+      </body>
     </html>
   );
 }
