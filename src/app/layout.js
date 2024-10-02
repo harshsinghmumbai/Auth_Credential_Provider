@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <main className="max-w-[1440px] m-auto bg-[#b3b3b3]">
+        <main className="max-w-[1440px] m-auto">
           {children}
           <Toaster />
         </main>

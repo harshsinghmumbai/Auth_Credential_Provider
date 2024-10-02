@@ -15,13 +15,16 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const FormValidation = z
   .object({
     Name: z
       .string()
       .regex(/^[A-Za-z\s]+$/, "Name must be only contain alphabetic characters")
-      .min(3, "Name must be contain min 3 Characters")
+      .min(2, "Name must be contain min 2 Characters")
       .max(50, "Name must be contain max 50 Characters"),
     Email: z.string().min(1, "Email confirm is required").email(),
     Password: z
@@ -39,6 +42,8 @@ const FormValidation = z
 const RegisterForm = () => {
   const [PasswordShow, setPasswordShow] = useState(false);
   const [ConfirmPasswordShow, setConfirmPasswordShow] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(FormValidation),
@@ -54,7 +59,31 @@ const RegisterForm = () => {
     const email = value.Email;
     const name = value.Name;
     const password = value.Password;
+    setisLoading(true);
     try {
+      const UserExist = await fetch("http://localhost:3000/api/userExits", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const { user } = await UserExist.json();
+
+      if (user) {
+        toast("Bhai User already", {
+          description: `${user.email} is already`,
+          className:
+            "group-[.toaster]:border-2 group-[.toaster]:border-red-400 group-[.toaster]:bg-red-200",
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+        });
+        return setisLoading(false);
+      }
+
       const register = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
@@ -62,6 +91,12 @@ const RegisterForm = () => {
         },
         body: JSON.stringify({ email, password, name }),
       });
+      if (register.ok) {
+        form.reset();
+        router.push("/");
+      } else {
+        console.log("Error occurred on register part ");
+      }
     } catch (error) {
       console.log("Error on onSubmit Function sending data to server", error);
     }
@@ -74,11 +109,7 @@ const RegisterForm = () => {
             Register
           </h1>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4"
-              autoComplete="off"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <InputField
                 name="Name"
                 formControl={form.control}
@@ -125,13 +156,20 @@ const RegisterForm = () => {
                 ) : (
                   <FaEyeSlash
                     onClick={() => setConfirmPasswordShow(!ConfirmPasswordShow)}
-                    className="absolute top-3 text-lg right-3"
+                    className="absolute top-3 text-lg right-3 cursor-pointer"
                   />
                 )}
               </div>
-              <Button type="submit" className="w-full text-base">
-                Register
-              </Button>
+              {isLoading ? (
+                <Button disabled className="w-full text-base">
+                  Register
+                  <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                </Button>
+              ) : (
+                <Button type="submit" className="w-full text-base">
+                  Register
+                </Button>
+              )}
             </form>
           </Form>
           <Link className="text-sm mt-3 text-right" href={"/"}>
@@ -156,7 +194,7 @@ const InputField = ({ name, formControl, placeholder, inputType }) => {
           <FormControl>
             <Input type={inputType} placeholder={placeholder} {...field} />
           </FormControl>
-          <FormMessage />
+          <FormMessage className="text-xs lg:text-sm w-full mt-0.5" />
         </FormItem>
       )}
     />
