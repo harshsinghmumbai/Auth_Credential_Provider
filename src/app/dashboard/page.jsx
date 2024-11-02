@@ -1,9 +1,9 @@
-import Dashboard from "@/components/Dashboard";
+import { LandingPageComponent } from "@/components/Landing_Page";
 
 const dashboard = () => {
   return (
     <>
-      <Dashboard />
+      <LandingPageComponent />
     </>
   );
 };

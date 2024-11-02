@@ -18,6 +18,7 @@ import { FaEye } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { Meteors } from "./ui/Meteors";
 
 const FormValidation = z
   .object({
@@ -72,8 +73,8 @@ const RegisterForm = () => {
       const { user } = await UserExist.json();
 
       if (user) {
-        toast("Bhai User already", {
-          description: `${user.email} is already`,
+        toast("User already Exist", {
+          description: `${user.email} is already  exist in Database`,
           className:
             "group-[.toaster]:border-2 group-[.toaster]:border-red-400 group-[.toaster]:bg-red-200",
           action: {
@@ -91,7 +92,18 @@ const RegisterForm = () => {
         },
         body: JSON.stringify({ email, password, name }),
       });
+
+      //ok:- server has successfully processed(get) the request from client
       if (register.ok) {
+        toast(`${name}`, {
+          description: `${name} you Register successfully`,
+          className:
+            "group-[.toaster]:border group-[.toaster]:border-green-400 group-[.toaster]:bg-green-200",
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+        });
         form.reset();
         router.push("/");
       } else {
@@ -104,8 +116,8 @@ const RegisterForm = () => {
   return (
     <>
       <div className="grid place-items-center h-screen">
-        <div className="shadow-lg p-5 rounded-lg border-t-4 border border-green-600 bg-[#e7e7e7] sm:w-[300px] lg:w-[450px]">
-          <h1 className="text-xl font-bold my-4 text-center font-serif tracking-wider sm:text-2xl">
+        <div className="shadow-2xl p-5 rounded-lg border-t-4 overflow-hidden border border-green-600 bg-[#e7e7e7] w-fit sm:w-[350px] lg:w-[450px] bg-gradient-to-r from-green-300 relative ">
+          <h1 className="text-xl dark:text-black font-bold my-4 text-center font-serif tracking-wider sm:text-2xl">
             Register
           </h1>
           <Form {...form}>
@@ -128,6 +140,7 @@ const RegisterForm = () => {
                   formControl={form.control}
                   placeholder="Enter Password"
                   inputType={PasswordShow ? "text" : "password"}
+                  className={"pr-10"}
                 />
                 {PasswordShow ? (
                   <FaEye
@@ -145,13 +158,14 @@ const RegisterForm = () => {
                 <InputField
                   name="ConfirmPassword"
                   formControl={form.control}
-                  placeholder="Enter Confirm Password"
+                  placeholder="Enter ConfirmPassword"
                   inputType={ConfirmPasswordShow ? "text" : "password"}
+                  className={"pr-10"}
                 />
                 {ConfirmPasswordShow ? (
                   <FaEye
                     onClick={() => setConfirmPasswordShow(!ConfirmPasswordShow)}
-                    className="absolute top-3 text-lg right-3"
+                    className="absolute top-3 text-lg right-3 cursor-pointer"
                   />
                 ) : (
                   <FaEyeSlash
@@ -172,11 +186,13 @@ const RegisterForm = () => {
               )}
             </form>
           </Form>
-          <Link className="text-sm mt-3 text-right" href={"/"}>
+          <Link className="text-sm mt-3 text-right dark:text-black" href={"/"}>
             <p className="mt-2">
               Already have account ? <span className="underline">Login</span>
             </p>
           </Link>
+
+          <Meteors number={35} />
         </div>
       </div>
     </>
@@ -184,7 +200,13 @@ const RegisterForm = () => {
 };
 export default RegisterForm;
 
-const InputField = ({ name, formControl, placeholder, inputType }) => {
+const InputField = ({
+  name,
+  formControl,
+  placeholder,
+  inputType,
+  className,
+}) => {
   return (
     <FormField
       control={formControl}
@@ -192,7 +214,12 @@ const InputField = ({ name, formControl, placeholder, inputType }) => {
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input type={inputType} placeholder={placeholder} {...field} />
+            <Input
+              type={inputType}
+              placeholder={placeholder}
+              {...field}
+              className={className}
+            />
           </FormControl>
           <FormMessage className="text-xs lg:text-sm w-full mt-0.5" />
         </FormItem>
