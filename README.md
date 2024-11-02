@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Authentication Using Credential Provider
 
-## Getting Started
+ <h3>Added Authentication in this Project with email and password using NextAuth. Additionally, used MongoDB to store user details along with Tailwind CSS for designing the UI.</h3>
 
-First, run the development server:
+# Login page with Validation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Screenshot (441)](https://github.com/user-attachments/assets/fb052292-897e-4bf7-8922-808dd73ef784)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Register Page with Validation.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+![Screenshot (443)](https://github.com/user-attachments/assets/91f9e450-d851-44d8-9fd0-b9ab85f50f37)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# User cannot register again using the same email address.
 
-## Learn More
+![Screenshot (444)](https://github.com/user-attachments/assets/eecf1125-d87f-417f-8f45-839581a70011)
 
-To learn more about Next.js, take a look at the following resources:
+# User Dashboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![screencapture-localhost-3000-dashboard-2024-11-02-12_15_29](https://github.com/user-attachments/assets/fc6022d6-ae72-4fcd-9e7a-b29f0ada9429)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Feature of this Project
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h3>
+1. Fully Responsive Design. </br>
+2. Dark Mode Option. </br>
+3. Form with Validation. </br>
+4. Loading Spinner and Attractive Notifications. </br>
+5. Protect Routes such as Dashboard page etc. </br>
+6. Register new User in MongoDB Database. </br>
+7. User cannot register again using the same email address if its already Register in WebApp. </br>
+8. User can Easily login in WebApp. </br>
+9. Form with Confirm Password Field and also show and Hide password Icon.</br>
+10. User passwords are stored in the database in an encrypted format.</br>
+</h3>

@@ -130,7 +130,8 @@ const LoginForm = () => {
             href={"/register"}
           >
             <p className="mt-2">
-              Don't have account ? <span className="underline">Register</span>
+              Don&apos;t have account ?{" "}
+              <span className="underline">Register</span>
             </p>
           </Link>
 

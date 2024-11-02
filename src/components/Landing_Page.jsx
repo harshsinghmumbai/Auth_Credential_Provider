@@ -170,8 +170,8 @@ export function LandingPageComponent() {
                         </span>
                       </h1>
                       <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                        We're building the future of technology. Join us on this
-                        exciting journey.
+                        We&apos;re building the future of technology. Join us on
+                        this exciting journey.
                       </p>
                     </div>
                     <div className="flex flex-col gap-2 min-[400px]:flex-row">

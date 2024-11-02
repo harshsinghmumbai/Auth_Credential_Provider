@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="!scroll-smooth">
       <body className={outfit.className}>
         <main className="max-w-[1400px] m-auto">
           <ThemeProvider
