@@ -62,7 +62,7 @@ const RegisterForm = () => {
     const password = value.Password;
     setisLoading(true);
     try {
-      const UserExist = await fetch("http://localhost:3000/api/userExits", {
+      const UserExist = await fetch("/api/userExits", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const RegisterForm = () => {
         return setisLoading(false);
       }
 
-      const register = await fetch("http://localhost:3000/api/register", {
+      const register = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
