@@ -215,7 +215,7 @@ export function LandingPageComponent() {
                                 onClick={() => {
                                   signIn("credentials");
                                 }}
-                                className="text-base lg:text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 tracking-wider"
+                                className="text-base lg:text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 tracking-wider cursor-pointer hover:text-white dark:hover:text-black"
                               >
                                 Sign In
                               </Button>
@@ -226,7 +226,7 @@ export function LandingPageComponent() {
                                 onClick={() => {
                                   return signOut();
                                 }}
-                                className="text-base lg:text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 tracking-wider"
+                                className="text-base lg:text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 tracking-wider cursor-pointer dark:hover:text-black hover:text-white"
                               >
                                 Sign Out
                               </Button>
